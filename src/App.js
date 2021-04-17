@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Countdown from './components/Countdown/Countdown';
+
+import classes from './App.module.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const earthDay = new Date();
+    earthDay.setFullYear(2021, 3, 22);
+    earthDay.setHours(9, 0, 0, 0);
+
+    return (
+        <div className={classes.App}>
+            <Countdown title="Earth Day" date={earthDay} />
+        </div>
+    );
 }
 
 export default App;

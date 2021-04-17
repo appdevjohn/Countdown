@@ -1,0 +1,16 @@
+.Interval {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.amount {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.interval {
+    font-size: 14;
+    font-weight: 400;
+}
