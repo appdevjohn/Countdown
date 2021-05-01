@@ -1,6 +1,7 @@
 .Option {
     display: block;
     margin: 1rem;
+    cursor: pointer;
 }
 
 .title {
@@ -11,16 +12,20 @@
 
 .optionGrid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0.5rem;
     row-gap: 0.5rem;
 }
 
-.optionGrid div {
+.optionChoice {
     padding: 0.4rem 0;
     border: 1px solid black;
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.selected {
+    background-color: black;
+    color: white;
 }

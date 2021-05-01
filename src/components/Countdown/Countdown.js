@@ -10,6 +10,7 @@ const Countdown = props => {
     return (
         <div className={classes.Countdown}>
             <div className={classes.title}>{props.title}</div>
+            <div className={classes.date}>{props.date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</div>
             <div className={classes.intervals}>
                 <Interval amount={days} interval="days" />
                 <Interval amount={hours} interval="hours" />

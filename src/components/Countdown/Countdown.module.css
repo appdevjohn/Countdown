@@ -1,13 +1,18 @@
 .Countdown {
     display: inline-block;
     width: 18rem;
-    margin: 1rem;
+    margin: 1.6rem;
 }
 
 .title {
     font-size: 32px;
     font-weight: 700;
     text-align: center;
+}
+
+.date {
+    text-align: center;
+    margin: 0.5rem 0;
 }
 
 .intervals {

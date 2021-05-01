@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Countdown from '../../components/Countdown/Countdown';
 
@@ -12,6 +13,7 @@ const Countdowns = props => {
     return (
         <div className={classes.Countdowns}>
             {countdowns}
+            <Link to="/new-countdown">New Countdown</Link>
         </div>
     );
 }
