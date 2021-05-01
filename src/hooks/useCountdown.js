@@ -23,10 +23,10 @@ const useCountdown = endDate => {
     const outputSeconds = Math.floor(secondsLeft);
 
     return {
-        days: outputDays,
-        hours: outputHours,
-        minutes: outputMinutes,
-        seconds: outputSeconds
+        days: outputDays >= 0 ? outputDays : 0,
+        hours: outputHours >= 0 ? outputHours : 0,
+        minutes: outputMinutes >= 0 ? outputMinutes : 0,
+        seconds: outputSeconds >= 0 ? outputSeconds : 0
     }
 }
 

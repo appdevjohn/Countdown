@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import Option from '../../components/Option/Option';
 
@@ -10,19 +11,21 @@ const NewCountdown = props => {
     const [year, setYear] = useState();
     const [month, setMonth] = useState();
     const [day, setDay] = useState();
-    const [hour, setHour] = useState();
+
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     return (
         <div className={classes.NewCountdown}>
-            <div>New Countdown</div>
-            <input type="text" name="title" placeholder="Title" value={title} onChange={event => {
+            <div className={classes.title}>New Countdown</div>
+            <input className={classes.titleInput} type="text" name="title" placeholder="Title" value={title} onChange={event => {
                 setTitle(event.target.value);
             }} />
             <Option title="Year" options={['2021', '2022', '2023']} onSelect={option => setYear(option)} />
-            {year ? <Option title="Month" options={['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']} onSelect={option => setMonth(option)} /> : null}
+            {year ? <Option title="Month" options={months} onSelect={option => setMonth(months.indexOf(option))} /> : null}
             {month ? <Option title="Day" options={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']} onSelect={option => setDay(option)} /> : null}
-            {day ? <button onClick={() => {
-                props.addCountdown(title, new Date());
+            {day ? <button className={classes.button} onClick={() => {
+                props.addCountdown(title, new Date(year, month, day, 9, 0, 0));
+                props.history.push('/countdown');
             }}>Add Countdown</button> : null}
         </div>
     )
@@ -38,4 +41,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(NewCountdown);
+export default withRouter(connect(null, mapDispatchToProps)(NewCountdown));

@@ -1,14 +1,24 @@
 const initialState = {
     countdowns: [
         {
-            title: 'Earth Day',
-            date: new Date('Thu Apr 22 2021 09:00:00 GMT-0400 (EDT)')
+            title: 'Mother\'s Day',
+            date: new Date('Sun May 10 2021 09:00:00 GMT-0400 (EDT)')
         }
     ]
 }
 
 const reducer = (state = initialState, action) => {
-    return state;
+    switch (action.type) {
+        case 'COUNTDOWN_ADD':
+            const newCountdowns = state.countdowns.map(cd => ({ ...cd }));
+            newCountdowns.push({ title: action.title, date: action.date });
+            return {
+                ...state,
+                countdowns: newCountdowns
+            }
+        default:
+            return state;
+    }
 }
 
 export default reducer;
