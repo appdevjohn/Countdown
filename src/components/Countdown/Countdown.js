@@ -8,7 +8,7 @@ const Countdown = props => {
     const { days, hours, minutes, seconds } = useCountdown(props.date);
 
     return (
-        <div className={classes.Countdown} onDoubleClick={() => {
+        <div className={classes.Countdown} onClick={() => {
             props.onDelete(props.id);
         }}>
             <div className={classes.title}>{props.title}</div>

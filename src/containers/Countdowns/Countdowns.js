@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { deleteCountdown } from '../../indexedDB';
 
 import Countdown from '../../components/Countdown/Countdown';
 
@@ -9,6 +10,7 @@ const Countdowns = props => {
     const confirmDeleteCountdown = id => {
         if (window.confirm('Are you sure you want to delete this?')) {
             props.onDeleteCountdown(id);
+            deleteCountdown(id);
         }
     }
 
@@ -20,6 +22,7 @@ const Countdowns = props => {
         <div className={classes.Countdowns}>
             {countdowns}
             <Link to="/new-countdown" className={classes.newCountdown}>New Countdown</Link>
+            <div className={classes.deleteText}>Tap a countdown to delete it.</div>
         </div>
     );
 }

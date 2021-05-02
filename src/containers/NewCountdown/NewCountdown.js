@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { addCountdown } from '../../indexedDB';
 
 import NavBar from '../../components/NavBar/NavBar';
 import Option from '../../components/Option/Option';
@@ -99,7 +100,13 @@ const NewCountdown = props => {
                 className={classes.button}
                 style={{ display: hour !== null ? 'block' : 'none' }}
                 onClick={() => {
-                    props.addCountdown(title, new Date(year, month, day, hour, 0, 0));
+                    const date = new Date(year, month, day, hour, 0, 0)
+                    props.addCountdown(title, date);
+                    addCountdown({
+                        title: title,
+                        date: date,
+                        id: title + date.toString()
+                    });
                     props.history.push('/');
                 }}>Add Countdown</button>
         </div>

@@ -16,6 +16,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 countdowns: state.countdowns.map(cd => ({ ...cd })).filter(cd => cd.id !== action.id)
             }
+        case 'COUNTDOWNS_SET':
+            return {
+                ...state,
+                countdowns: action.countdowns
+            }
         default:
             return state;
     }

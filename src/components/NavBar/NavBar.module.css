@@ -35,8 +35,9 @@
 
 @media (prefers-color-scheme: dark) {
     .NavBar {
-        background-color: #222222;
-        box-shadow: 1px 0px 4px #000000;
+        background-color: black;
+        box-shadow: none;
+        border-bottom: 0.5px solid #ccc;
     }
 
     .back img, .add img {
