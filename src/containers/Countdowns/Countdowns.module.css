@@ -3,4 +3,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+}
+
+.newCountdown {
+    text-decoration: none;
+    border: none;
+    color: var(--button-text);
+    background-color: var(--button-color);
+    padding: 8px;
+    border-radius: 5px;
+    margin: 3rem 0;
 }

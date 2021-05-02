@@ -8,7 +8,9 @@ const Countdown = props => {
     const { days, hours, minutes, seconds } = useCountdown(props.date);
 
     return (
-        <div className={classes.Countdown}>
+        <div className={classes.Countdown} onDoubleClick={() => {
+            props.onDelete(props.id);
+        }}>
             <div className={classes.title}>{props.title}</div>
             <div className={classes.date}>{props.date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</div>
             <div className={classes.intervals}>

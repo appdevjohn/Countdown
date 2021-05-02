@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import NavBar from '../../components/NavBar/NavBar';
 import Option from '../../components/Option/Option';
 
 import classes from './NewCountdown.module.css';
@@ -29,29 +30,78 @@ const NewCountdown = props => {
         }
     }
 
+    useEffect(() => {
+        if (year !== null && month === null) {
+            document.getElementById('month-option').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else if (month !== null && day === null) {
+            document.getElementById('day-option').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else if (day !== null && hour === null) {
+            document.getElementById('hour-option').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else if (hour !== null) {
+            document.getElementById('create-button').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }, [year, month, day, hour])
+
     return (
         <div className={classes.NewCountdown}>
-            <div className={classes.title}>New Countdown</div>
-            <input className={classes.titleInput} type="text" name="title" placeholder="Title" value={title} onChange={event => {
-                setTitle(event.target.value);
-            }} />
-            <Option title="Year" columns={3} options={['2021', '2022', '2023']} selected={year} onSelect={option => {
-                setYear(option);
-
-            }} />
-            {year !== null ? <Option title="Month" columns={3} options={months} selected={months[month]} onSelect={option => {
-                setMonth(months.indexOf(option))
-            }} /> : null}
-            {month !== null ? <Option title="Day" columns={7} offset={dayOffset} options={days} selected={day} onSelect={option => {
-                setDay(option)
-            }} /> : null}
-            {day !== null ? <Option title="Hour" columns={4} options={hours} selected={hours[hour]} onSelect={option => {
-                setHour(hours.indexOf(option))
-            }} /> : null}
-            {day ? <button className={classes.button} onClick={() => {
-                props.addCountdown(title, new Date(year, month, day, hour + 1, 0, 0));
-                props.history.push('/countdown');
-            }}>Add Countdown</button> : null}
+            <NavBar title="New Countdown" back="/" />
+            <input
+                className={classes.titleInput}
+                type="text" name="title"
+                placeholder="Title"
+                value={title}
+                onChange={event => {
+                    setTitle(event.target.value);
+                }} />
+            <Option
+                id="year-option"
+                title="Year"
+                display={true}
+                columns={3}
+                options={['2021', '2022', '2023']}
+                selected={year}
+                onSelect={option => {
+                    setYear(option);
+                }} />
+            <Option
+                id="month-option"
+                title="Month"
+                display={year !== null}
+                columns={3}
+                options={months}
+                selected={months[month]}
+                onSelect={option => {
+                    setMonth(months.indexOf(option));
+                }} />
+            <Option
+                id="day-option"
+                title="Day"
+                display={month !== null}
+                columns={7}
+                offset={dayOffset}
+                options={days}
+                selected={day}
+                onSelect={option => {
+                    setDay(option);
+                }} />
+            <Option
+                id="hour-option"
+                title="Hour"
+                display={day !== null}
+                columns={4}
+                options={hours}
+                selected={hours[hour]}
+                onSelect={option => {
+                    setHour(hours.indexOf(option));
+                }} />
+            <button
+                id="create-button"
+                className={classes.button}
+                style={{ display: hour !== null ? 'block' : 'none' }}
+                onClick={() => {
+                    props.addCountdown(title, new Date(year, month, day, hour, 0, 0));
+                    props.history.push('/');
+                }}>Add Countdown</button>
         </div>
     )
 }
@@ -61,7 +111,8 @@ const mapDispatchToProps = dispatch => {
         addCountdown: (title, date) => dispatch({
             type: 'COUNTDOWN_ADD',
             title: title,
-            date: date
+            date: date,
+            id: title + date.toString()
         })
     }
 }

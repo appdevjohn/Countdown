@@ -1,6 +1,6 @@
 .Option {
     display: block;
-    margin: 1rem;
+    margin: 2rem 1rem;
     cursor: pointer;
 }
 
@@ -18,7 +18,7 @@
 
 .optionChoice {
     padding: 0.4rem 0;
-    border: 1px solid black;
+    border: 1px solid var(--text-color);
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -26,6 +26,12 @@
 }
 
 .selected {
-    background-color: black;
+    background-color: var(--text-color);
     color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+    .selected {
+        color: black;
+    }
 }

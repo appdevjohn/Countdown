@@ -1,20 +1,20 @@
 const initialState = {
-    countdowns: [
-        {
-            title: 'Mother\'s Day',
-            date: new Date('Sun May 10 2021 09:00:00 GMT-0400 (EDT)')
-        }
-    ]
+    countdowns: []
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'COUNTDOWN_ADD':
             const newCountdowns = state.countdowns.map(cd => ({ ...cd }));
-            newCountdowns.push({ title: action.title, date: action.date });
+            newCountdowns.push({ title: action.title, date: action.date, id: action.id });
             return {
                 ...state,
                 countdowns: newCountdowns
+            }
+        case 'COUNTDOWN_DELETE':
+            return {
+                ...state,
+                countdowns: state.countdowns.map(cd => ({ ...cd })).filter(cd => cd.id !== action.id)
             }
         default:
             return state;

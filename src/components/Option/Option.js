@@ -19,7 +19,7 @@ const Option = props => {
     }
 
     return (
-        <div className={classes.Option}>
+        <div className={classes.Option} id={props.id} style={{ display: props.display ? 'block' : 'none' }}>
             <div className={classes.title}>{props.title}</div>
             <div className={classes.optionGrid} style={{gridTemplateColumns: 'repeat(' + props.columns + ', 1fr)'}}>
                 {offset}
