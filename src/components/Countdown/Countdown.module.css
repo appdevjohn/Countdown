@@ -2,6 +2,7 @@
     display: inline-block;
     width: 18rem;
     margin: 1.6rem;
+    cursor: pointer;
 }
 
 .title {

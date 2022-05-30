@@ -15,9 +15,9 @@ const App = () => {
 
     const addCountdownHandler = (title, date) => {
         const newCountdown = {
-            title: title,
+            title: title.trim(),
             date: date,
-            id: title + date.toString()
+            id: new Date()
         }
 
         addCountdown(newCountdown).then(() => {

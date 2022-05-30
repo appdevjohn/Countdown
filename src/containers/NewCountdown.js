@@ -55,7 +55,7 @@ const NewCountdown = props => {
     return (
         <Fragment>
             {isShowing ? <div className={classes.backdrop}></div> : null}
-            <div className={classes.NewCountdown} style={{ transform: isShowing ? 'translateY(0)' : null }}>
+            <div className={classes.NewCountdown} style={{ transform: isShowing ? 'translate(-50%, 0)' : null }}>
                 <NavBar title="New Countdown" back="/" />
                 <div className={classes.newCountdownViewContent}>
                     <div className={classes.titleInputContainer}>
@@ -120,6 +120,7 @@ const NewCountdown = props => {
                                 props.history.push('/');
                             }}>Add Countdown</button>
                     </div>
+                    <div style={{ height: '100px' }}></div>
                 </div>
             </div>
         </Fragment>

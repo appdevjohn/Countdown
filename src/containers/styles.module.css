@@ -9,13 +9,15 @@
 .NewCountdown {
     position: fixed;
     display: block;
+    left: 50%;
     padding-bottom: 100px;
     background-color: white;
     border-radius: 16px 16px 0 0;
     width: 100%;
+    max-width: 45rem;
     height: calc(100vh - 104px);
     top: 40px;
-    transform: translateY(100vh);
+    transform: translate(-50%, 100vh);
     transition: transform 0.2s ease;
 }
 
