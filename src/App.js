@@ -1,42 +1,46 @@
-import { useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { getCountdowns } from './indexedDB';
+import { useState, useEffect } from 'react';
+import { getCountdowns, addCountdown, deleteCountdown } from './indexedDB';
 
-import Countdowns from './containers/Countdowns/Countdowns';
-import NewCountdown from './containers/NewCountdown/NewCountdown';
+import Countdowns from './containers/Countdowns';
+import NewCountdown from './containers/NewCountdown';
 
-import classes from './App.module.css';
+const App = () => {
+    const [countdowns, setCountdowns] = useState([]);
 
-const App = props => {
-    const { onSetCountdowns } = props;
     useEffect(() => {
         getCountdowns().then(countdowns => {
-            onSetCountdowns(countdowns);
+            setCountdowns(countdowns);
         });
-    }, [onSetCountdowns]);  
+    }, []);
+
+    const addCountdownHandler = (title, date) => {
+        const newCountdown = {
+            title: title,
+            date: date,
+            id: title + date.toString()
+        }
+
+        addCountdown(newCountdown).then(() => {
+            setCountdowns(prevCountdowns => {
+                return [...prevCountdowns.map(cd => ({ ...cd })), newCountdown];
+            });
+        })
+    }
+
+    const deleteCountdownHandler = countdownId => {
+        deleteCountdown(countdownId).then(() => {
+            setCountdowns(prevCountdowns => {
+                return prevCountdowns.filter(cd => cd.id !== countdownId).map(cd => ({ ...cd }));
+            });
+        })
+    }
 
     return (
-        <div className={classes.App}>
-            <Switch>
-                <Route path="/new-countdown" exact>
-                    <NewCountdown />
-                </Route>
-                <Route path="/">
-                    <Countdowns />
-                </Route>
-            </Switch>
+        <div style={{ position: 'relative' }}>
+            <Countdowns countdowns={countdowns} onDeleteCountdown={deleteCountdownHandler} />
+            <NewCountdown onAddCountdown={addCountdownHandler} />
         </div>
     );
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onSetCountdowns: countdowns => dispatch({
-            type: 'COUNTDOWNS_SET',
-            countdowns: countdowns
-        })
-    }
-}
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;

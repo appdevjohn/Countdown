@@ -1,0 +1,99 @@
+.Countdowns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.NewCountdown {
+    position: fixed;
+    display: block;
+    padding-bottom: 100px;
+    background-color: white;
+    border-radius: 16px 16px 0 0;
+    width: 100%;
+    height: calc(100vh - 104px);
+    top: 40px;
+    transform: translateY(100vh);
+    transition: transform 0.2s ease;
+}
+
+.newCountdownViewContent {
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    animation: backdrop 0.1s linear;
+}
+
+.newCountdown {
+    text-decoration: none;
+    border: none;
+    color: var(--button-text);
+    background-color: var(--button-color);
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 3rem 3rem 4px 3rem;
+}
+
+.deleteText {
+    font-size: 0.7rem;
+}
+
+.titleInputContainer {
+    margin: 1rem;
+}
+
+.titleInput {
+    display: block;
+    width: 100%;
+    appearance: none;
+    border: 1px solid black;
+    color: black;
+    background-color: white;
+    font-size: 1rem;
+    padding: 8px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.button {
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    background-color: var(--button-color);
+    color: var(--button-text);
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+@keyframes backdrop {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@media (prefers-color-scheme: dark) {
+    .titleInput {
+        border: 1px solid white;
+        color: white;
+        background-color: black;
+    }
+
+    .NewCountdown {
+        background-color: black;
+    }
+}
